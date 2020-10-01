@@ -135,7 +135,7 @@ public class SellerDaoJDBC implements SellerDao{
 				return obj;
 			}
 			else {
-				return null;
+				throw new DbException("Invalid id");
 			}
 		}
 		catch (SQLException e) {
