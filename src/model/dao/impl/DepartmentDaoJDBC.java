@@ -163,5 +163,4 @@ public class DepartmentDaoJDBC implements DepartmentDao{
 			DB.closeResultSet(rs);
 		}
 	}
-
 }
