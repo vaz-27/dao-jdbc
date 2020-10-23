@@ -11,27 +11,29 @@ import model.entities.Department;
 import model.entities.Seller;
 
 public class Program {
+	
+	
 
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 		
-		SellerDao sellerDao = DaoFactory.createSellerDao();
+		SellerDao sellerDao1 = DaoFactory.createSellerDao();
 		
 		System.out.println("=== TEST 1: seller findById ===");		
-		Seller seller = sellerDao.findById(3);		
+		Seller seller = sellerDao1.findById(3);		
 		System.out.println(seller);
 	
 		System.out.println("\n\n=== TEST 2: seller findByDepartment ===");
 		Department department = new Department(2,null);
-		List<Seller> list = sellerDao.findByDepartment(department);
+		List<Seller> list = sellerDao1.findByDepartment(department);
 		
 		for(Seller obj : list) {
 			System.out.println(obj);
 		}
 		
 		System.out.println("\n\n=== TEST 3: seller findAll ===");
-		list = sellerDao.findAll();
+		list = sellerDao1.findAll();
 		
 		for(Seller obj : list) {
 			System.out.println(obj);
@@ -39,21 +41,21 @@ public class Program {
 
 		System.out.println("\n\n=== TEST 4: seller insert ===");
 		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.00, department);
-		sellerDao.insert(newSeller);
+		sellerDao1.insert(newSeller);
 		System.out.println("Inserted! New id "+ newSeller.getId());
 		
 		
 		System.out.println("\n\n=== TEST 5: seller update ===");
-		seller = sellerDao.findById(1);
+		seller = sellerDao1.findById(1);
 		seller.setName("Marta Wayne");
 		seller.setEmail("marta@gmail.com");
-		sellerDao.update(seller);
+		sellerDao1.update(seller);
 		System.out.println("Update completed");
 		
 		System.out.println("\n\n=== TEST 6: seller delete ===");
 		System.out.print("Enter id for delete teste: ");
 		int id = sc.nextInt();
-		sellerDao.deleteById(id);
+		sellerDao1.deleteById(id);
 		System.out.println("Delete completed");
 		
 		
