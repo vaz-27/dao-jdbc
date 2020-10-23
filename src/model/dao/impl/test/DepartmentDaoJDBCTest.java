@@ -1,5 +1,6 @@
-/*package model.dao.impl.test;
+package model.dao.impl.test;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import model.dao.DaoFactory;
@@ -12,9 +13,11 @@ public class DepartmentDaoJDBCTest {
 	
 	@Test
 	public void insertValidoTest() {
+		System.out.println("Iniciou o teste!");
 		Department dep = new Department(null, "Music");
 		departmentDao.insert(dep);
+		//Integer id = dep.getId();
+		Assert.assertEquals(13,dep.getId());
 	}
 
 }
-*/
