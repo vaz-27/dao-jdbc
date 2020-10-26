@@ -1,6 +1,7 @@
 package model.dao.impl.test;
 
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -26,13 +27,13 @@ public class DepartmentDaoJDBCTest {
 	public void testA_insert() {
 		departmentDao.insert(dep);
 		Assert.assertEquals("Music", dep.getName());
-		Assert.assertEquals(14, dep.getId(), 0);
+		Assert.assertEquals(16, dep.getId(), 0);
 	}
 	
 	@Test
-	public void testB_delete() {
-		departmentDao.deleteById(dep.getId());
-		Assert.assertNull(dep);
+	public void testB_deleteInvalido() {
+		departmentDao.deleteById(20);
+		Assert.assertThat(20, CoreMatchers.is("Invalid id"));
 	}
 
 }
