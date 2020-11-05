@@ -1,18 +1,16 @@
 package model.dao.impl.test;
 
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
 import model.entities.Department;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentDaoJDBCTest {
 	
 	DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
@@ -24,16 +22,23 @@ public class DepartmentDaoJDBCTest {
 	}
 	
 	@Test
-	public void testA_insert() {
+	public void insereDepartment() {
+		//acao
 		departmentDao.insert(dep);
-		Assert.assertEquals("Music", dep.getName());
-		Assert.assertEquals(16, dep.getId(), 0);
+		
+		//verificacao
+		assertThat(dep.getId(), is(21));
 	}
 	
-	@Test
-	public void testB_deleteInvalido() {
-		departmentDao.deleteById(20);
-		Assert.assertThat(20, CoreMatchers.is("Invalid id"));
-	}
+//	@Test(expected = SQLException.class)
+//	public void naoInsereDepartmentException() {
+//		//cenario
+//		Department obj = new Department();
+//		
+//		//acao
+//		departmentDao.insert(obj);		
+//	}
+
+	
 
 }
