@@ -45,12 +45,20 @@ public class DepartmentDaoJDBCTest {
 
 	@Test
 	public void updateDepartment() {
-
+		//cenario
+		Department obj = new Department(null, "abc");
+		departmentDao.insert(obj);
+		obj.setName("Learning");
+		
+		//acao
+		departmentDao.update(obj);
+		
+		//verificacao
+		Assert.assertEquals("Learning",obj.getName());	
 	}
 	
 	@Test
 	public void encontraPorId() {
-		
 		//acao
 		Department obj = departmentDao.findById(1);
 		
