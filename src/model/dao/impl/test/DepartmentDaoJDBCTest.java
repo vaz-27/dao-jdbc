@@ -1,18 +1,20 @@
 package model.dao.impl.test;
 
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
+
 import java.util.List;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
@@ -23,13 +25,10 @@ public class DepartmentDaoJDBCTest {
 	DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 	@Mock
 	Department dep;
-
-	@Rule
-	public ExpectedException exception =  ExpectedException.none();
 	
 	@Before
 	public void cenario() {
-		MockitoAnnotations.initMocks(this);
+		initMocks(this);
 	}
 	
 	@Test
@@ -41,9 +40,8 @@ public class DepartmentDaoJDBCTest {
 		departmentDao.insert(dep);
 		
 		//verificacao
-		Assert.assertThat(dep.getName(),CoreMatchers.is("Aprendizagem"));
+		assertThat(dep.getName(),is("Aprendizagem"));
 	}
-	
 
 	@Test
 	public void updateDepartment() {
@@ -56,7 +54,7 @@ public class DepartmentDaoJDBCTest {
 		departmentDao.update(obj);
 		
 		//verificacao
-		Assert.assertEquals("Learning",obj.getName());	
+		assertEquals("Learning",obj.getName());	
 	}
 	
 	@Test
@@ -65,13 +63,13 @@ public class DepartmentDaoJDBCTest {
 		Department obj = departmentDao.findById(1);
 		
 		//verificacao
-		Assert.assertEquals("Computers",obj.getName());
+		assertEquals("Computers",obj.getName());
 	}
 	
 	@Test(expected = db.DbException.class)
 	public void naoEncontraIdInvalido() {
 		//cenario
-		Mockito.when(departmentDao.findById(-1)).thenThrow(new Exception("Esse id é invalido"));
+		when(departmentDao.findById(-1)).thenThrow(new Exception("Esse id é invalido"));
 		departmentDao.findById(-1);
 	}
 
@@ -81,7 +79,7 @@ public class DepartmentDaoJDBCTest {
 		List<Department> lista = departmentDao.findAll();
 		
 		//verificacao
-		Assert.assertNotNull(lista);
+		assertNotNull(lista);
 	}
 	
 	@Test(expected = db.DbException.class)
