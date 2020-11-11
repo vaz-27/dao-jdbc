@@ -1,6 +1,8 @@
 package model.dao.impl.test;
 
 
+import java.util.List;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -66,12 +68,13 @@ public class DepartmentDaoJDBCTest {
 		Assert.assertEquals("Computers",obj.getName());
 	}
 
-//	@Test
+	@Test
 	public void findAll() {
 		//acao
+		List<Department> lista = departmentDao.findAll();
 		
 		//verificacao
-		
+		Assert.assertNotNull(lista);
 	}
 	
 	@Test(expected = db.DbException.class)
