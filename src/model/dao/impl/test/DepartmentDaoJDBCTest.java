@@ -67,6 +67,13 @@ public class DepartmentDaoJDBCTest {
 		//verificacao
 		Assert.assertEquals("Computers",obj.getName());
 	}
+	
+	@Test(expected = db.DbException.class)
+	public void naoEncontraIdInvalido() {
+		//cenario
+		Mockito.when(departmentDao.findById(-1)).thenThrow(new Exception("Esse id é invalido"));
+		departmentDao.findById(-1);
+	}
 
 	@Test
 	public void findAll() {
