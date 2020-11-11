@@ -1,8 +1,6 @@
 package model.dao.impl.test;
 
 
-import static org.hamcrest.CoreMatchers.is;
-
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,15 +45,17 @@ public class DepartmentDaoJDBCTest {
 
 	@Test
 	public void updateDepartment() {
-		//cenario
-		dep.setName("Aprendizagem");
-		Mockito.when(dep.getName()).thenReturn("Music");
+
+	}
+	
+	@Test
+	public void encontraPorId() {
 		
 		//acao
-		departmentDao.update(dep);
+		Department obj = departmentDao.findById(1);
 		
 		//verificacao
-		Assert.assertThat(dep.getName(), is("Music"));
+		Assert.assertEquals("Computers",obj.getName());
 	}
 
 }
