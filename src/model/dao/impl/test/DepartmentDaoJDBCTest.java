@@ -66,4 +66,22 @@ public class DepartmentDaoJDBCTest {
 		Assert.assertEquals("Computers",obj.getName());
 	}
 
+//	@Test
+	public void findAll() {
+		//acao
+		
+		//verificacao
+		
+	}
+	
+	@Test(expected = db.DbException.class)
+	public void deletarPorId() {
+		//cenario
+		dep.setId(100);
+		departmentDao.update(dep);
+		
+		//acao
+		departmentDao.deleteById(100);
+		departmentDao.findById(100);		
+	}
 }
