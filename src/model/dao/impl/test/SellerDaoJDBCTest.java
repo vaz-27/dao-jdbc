@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hamcrest.CoreMatchers;
@@ -13,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
@@ -88,5 +90,23 @@ public class SellerDaoJDBCTest {
 		//verifcacao
 		Assert.assertThat(sel.getEmail(), CoreMatchers.containsString("mellony@gmail.com"));
 		Assert.assertThat(sel.getName(), CoreMatchers.containsString("Mellony Gloria"));
+	}
+	
+	@Test
+	public void insertSeller() {
+		//cenario
+		Department dep = depdao.findById(1);
+		Mockito.when(seller.getName()).thenReturn("Joelma");
+		Mockito.when(seller.getEmail()).thenReturn("jojo@gmail.com");
+		Mockito.when(seller.getBirthDate()).thenReturn(new Date());
+		Mockito.when(seller.getBaseSalary()).thenReturn(3200.0);
+		Mockito.when(seller.getDepartment()).thenReturn(dep);
+		
+		//acao
+		sellerdao.insert(seller);
+		
+		//verificacao
+		Assert.assertThat(seller.getName(), CoreMatchers.is("Joelma"));
+		
 	}
 }
