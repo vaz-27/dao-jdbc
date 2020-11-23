@@ -7,6 +7,8 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.List;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -62,5 +64,29 @@ public class SellerDaoJDBCTest {
 		for (Seller seller : sel) {
 			assertThat(seller.getId(), is(5));
 		}
+	}
+	
+	@Test
+	public void encontraTodos() {
+		//acao
+		List<Seller> sel = sellerdao.findAll();
+		
+		//verificacao
+		Assert.assertNotNull(sel);
+	}
+	
+	@Test
+	public void updateSeller() {
+		//cenario
+		Seller sel = sellerdao.findById(2);
+		sel.setName("Mellony Gloria");
+		sel.setEmail("mellony@gmail.com");
+		
+		//acao
+		sellerdao.update(sel);
+		
+		//verifcacao
+		Assert.assertThat(sel.getEmail(), CoreMatchers.containsString("mellony@gmail.com"));
+		Assert.assertThat(sel.getName(), CoreMatchers.containsString("Mellony Gloria"));
 	}
 }
